@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
     kotlin("plugin.serialization") version "1.7.20"
     id("maven-publish")
-    id("co.touchlab.faktory.kmmbridge") version "0.1.2-SNAPSHOT"
+    id("co.touchlab.faktory.kmmbridge") version "0.2.2"
     kotlin("native.cocoapods") version "1.7.20"
     id("com.squareup.sqldelight") version libs.versions.sqlDelight.get()
 }
@@ -89,8 +89,11 @@ android {
 }
 
 kmmbridge {
-    faktoryReadKey.set("1EE4B4A7CFEF438A8C0DAF8981")
+    githubReleaseArtifacts()
+    githubReleaseVersions()
     cocoapods("git@github.com:touchlab/PodSpecs.git")
+    versionPrefix.set("1.0")
+    timestampVersions()
 }
 
 sqldelight {
