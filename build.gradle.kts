@@ -39,7 +39,7 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.bundles.shared.commonTest)
             }
         }
         val androidMain by getting {
@@ -50,7 +50,7 @@ kotlin {
         }
         val androidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13.2")
+                implementation(libs.bundles.shared.androidTest)
             }
         }
         val iosMain by getting {
@@ -85,6 +85,11 @@ android {
         minSdk = 21
         targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
     }
 }
 
