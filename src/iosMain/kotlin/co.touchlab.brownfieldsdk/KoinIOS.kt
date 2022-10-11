@@ -17,13 +17,9 @@ import platform.Foundation.NSUserDefaults
 
 fun initKoinIos(
     userDefaults: NSUserDefaults,
-    appInfo: AppInfo,
-    doOnStartup: () -> Unit
 ): KoinApplication = initKoin(
     module {
         single<Settings> { NSUserDefaultsSettings(userDefaults) }
-        single { appInfo }
-        single { doOnStartup }
     }
 )
 
@@ -32,11 +28,6 @@ actual val platformModule = module {
 
     single { Darwin.create() }
 }
-
-// Access from Swift to create a logger
-@Suppress("unused")
-fun Koin.loggerWithTag(tag: String) =
-    get<Logger>(qualifier = null) { parametersOf(tag) }
 
 @Suppress("unused") // Called from Swift
 object KotlinDependencies : KoinComponent {

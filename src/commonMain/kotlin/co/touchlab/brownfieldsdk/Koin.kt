@@ -26,17 +26,6 @@ fun initKoin(appModule: Module): KoinApplication {
         )
     }
 
-    // Dummy initialization logic, making use of appModule declarations for demonstration purposes.
-    val koin = koinApplication.koin
-    // doOnStartup is a lambda which is implemented in Swift on iOS side
-    val doOnStartup = koin.get<() -> Unit>()
-    doOnStartup.invoke()
-
-    val kermit = koin.get<Logger> { parametersOf(null) }
-    // AppInfo is a Kotlin interface with separate Android and iOS implementations
-    val appInfo = koin.get<AppInfo>()
-    kermit.v { "App Id ${appInfo.appId}" }
-
     return koinApplication
 }
 
@@ -79,8 +68,5 @@ val coreModule = module {
 internal inline fun <reified T> Scope.getWith(vararg params: Any?): T {
     return get(parameters = { parametersOf(*params) })
 }
-
-// Simple function to clean up the syntax a bit
-fun KoinComponent.injectLogger(tag: String): Lazy<Logger> = inject { parametersOf(tag) }
 
 expect val platformModule: Module
