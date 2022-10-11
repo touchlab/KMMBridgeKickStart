@@ -1,11 +1,11 @@
 plugins {
-    kotlin("multiplatform") version "1.7.10"
-    id("com.android.library")
-    kotlin("plugin.serialization") version "1.7.20"
-    id("maven-publish")
-    id("co.touchlab.faktory.kmmbridge") version "0.2.2"
-    kotlin("native.cocoapods") version "1.7.20"
+    kotlin("multiplatform") version libs.versions.kotlin.get()
+    kotlin("plugin.serialization") version libs.versions.kotlin.get()
+    kotlin("native.cocoapods") version libs.versions.cocoapods.get()
+    id("com.android.library") version libs.versions.android.gradle.plugin.get()
+    id("co.touchlab.faktory.kmmbridge") version libs.versions.kmmBridge.get()
     id("com.squareup.sqldelight") version libs.versions.sqlDelight.get()
+    id("maven-publish")
 }
 
 group = "co.touchlab"
