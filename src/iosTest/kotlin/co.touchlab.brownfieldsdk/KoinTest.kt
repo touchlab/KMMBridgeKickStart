@@ -12,7 +12,7 @@ class KoinTest {
     @Test
     fun checkAllModules() {
         initKoinIos(
-            userDefaults = NSUserDefaults.standardUserDefaults,
+            userDefaults = NSUserDefaults.standardUserDefaults
         ).checkModules {
             withParameters<Logger> { parametersOf("TestTag") }
         }

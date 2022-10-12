@@ -17,5 +17,3 @@ pluginManagement {
 rootProject.name = "BrownfieldSDK"
 
 enableFeaturePreview("VERSION_CATALOGS")
-
-

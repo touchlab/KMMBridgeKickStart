@@ -115,3 +115,17 @@ sqldelight {
         packageName = "co.touchlab.brownfieldsdk.db"
     }
 }
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    enableExperimentalRules.set(true)
+    verbose.set(true)
+    filter {
+        exclude { it.file.path.contains("build/") }
+    }
+}
+
+afterEvaluate {
+    tasks.named("check").configure {
+        dependsOn(tasks.getByName("ktlintCheck"))
+    }
+}
