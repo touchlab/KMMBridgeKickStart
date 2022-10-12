@@ -19,7 +19,6 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class DogApiTest {
     private val emptyLogger = Logger(
         config = object : LoggerConfig {

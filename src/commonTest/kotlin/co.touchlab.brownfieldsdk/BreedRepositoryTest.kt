@@ -18,7 +18,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 import kotlin.time.Duration.Companion.hours
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class BreedRepositoryTest {
 
     private var kermit = Logger(StaticConfig())
