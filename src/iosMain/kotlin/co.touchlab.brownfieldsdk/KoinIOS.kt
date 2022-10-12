@@ -21,7 +21,7 @@ fun initKoinIos(
 )
 
 actual val platformModule = module {
-    single<SqlDriver> { NativeSqliteDriver(BrownfieldSdkDb.Schema, "KampkitDb") }
+    single<SqlDriver> { NativeSqliteDriver(BrownfieldSdkDb.Schema, "BrownfieldSdkDb") }
 
     single { Darwin.create() }
 }
