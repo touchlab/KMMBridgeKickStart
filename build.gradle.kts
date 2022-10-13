@@ -7,6 +7,7 @@ plugins {
     id("co.touchlab.faktory.kmmbridge") version libs.versions.kmmBridge.get()
     id("com.squareup.sqldelight") version libs.versions.sqlDelight.get()
     id("maven-publish")
+    alias(libs.plugins.ktlint)
 }
 
 group = "co.touchlab"
@@ -42,7 +43,7 @@ kotlin {
                 implementation(libs.touchlab.stately)
                 implementation(libs.multiplatformSettings.common)
                 implementation(libs.kotlinx.dateTime)
-                api(libs.touchlab.kermit)
+                implementation(libs.touchlab.kermit)
             }
         }
         val commonTest by getting {
@@ -112,5 +113,19 @@ kmmbridge {
 sqldelight {
     database("BrownfieldSdkDb") {
         packageName = "co.touchlab.brownfieldsdk.db"
+    }
+}
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    enableExperimentalRules.set(true)
+    verbose.set(true)
+    filter {
+        exclude { it.file.path.contains("build/") }
+    }
+}
+
+afterEvaluate {
+    tasks.named("check").configure {
+        dependsOn(tasks.getByName("ktlintCheck"))
     }
 }

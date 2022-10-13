@@ -9,8 +9,6 @@ import co.touchlab.kermit.platformLogWriter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
 import org.koin.core.KoinApplication
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.parameter.parametersOf
@@ -48,10 +46,10 @@ val coreModule = module {
     }
 
     // platformLogWriter() is a relatively simple config option, useful for local debugging. For production
-    // uses you *may* want to have a more robust configuration from the native platform. In KaMP Kit,
-    // that would likely go into platformModule expect/actual.
+    // uses you *may* want to have a more robust configuration from the native platform. In Brownfield SDK,
+    // that would likely go into expect/actual.
     // See https://github.com/touchlab/Kermit
-    val baseLogger = Logger(config = StaticConfig(logWriterList = listOf(platformLogWriter())), "KampKit")
+    val baseLogger = Logger(config = StaticConfig(logWriterList = listOf(platformLogWriter())), "BrownfieldSDK")
     factory { (tag: String?) -> if (tag != null) baseLogger.withTag(tag) else baseLogger }
 
     single {
