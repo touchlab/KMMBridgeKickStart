@@ -3,7 +3,6 @@ package co.touchlab.brownfieldsdk.repository
 import co.touchlab.brownfieldsdk.DatabaseHelper
 import co.touchlab.brownfieldsdk.db.Breed
 import co.touchlab.brownfieldsdk.ktor.DogApi
-import co.touchlab.stately.ensureNeverFrozen
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Clock
@@ -19,10 +18,6 @@ class BreedRepository internal constructor(
 
     companion object {
         internal const val DB_TIMESTAMP_KEY = "DbTimestampKey"
-    }
-
-    init {
-        ensureNeverFrozen()
     }
 
     fun getBreeds(): Flow<List<Breed>> = dbHelper.selectAllItems()

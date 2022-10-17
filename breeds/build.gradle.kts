@@ -30,7 +30,6 @@ kotlin {
             dependencies {
                 implementation(libs.coroutines.core)
                 implementation(libs.bundles.ktor.common)
-                implementation(libs.touchlab.stately)
                 implementation(libs.multiplatformSettings.common)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
