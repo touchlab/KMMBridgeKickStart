@@ -2,8 +2,11 @@ plugins {
     id("java")
 }
 
-group = "co.touchlab.brownfield-sdk"
-version = "unspecified"
+val GROUP: String by project
+val VERSION_NAME: String by project
+
+group = GROUP
+version = VERSION_NAME
 
 repositories {
     mavenCentral()

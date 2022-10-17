@@ -7,8 +7,11 @@ plugins {
     id("maven-publish")
 }
 
-group = "co.touchlab.brownfield-sdk"
-version = "1.0"
+val GROUP: String by project
+val VERSION_NAME: String by project
+
+group = GROUP
+version = VERSION_NAME
 
 kotlin {
     android {
@@ -19,13 +22,6 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines.core)
