@@ -1,12 +1,8 @@
 package co.touchlab.brownfieldsdk
 
-import co.touchlab.brownfieldsdk.db.BrownfieldSdkDb
 import co.touchlab.brownfieldsdk.repository.BreedRepository
 import com.russhwolf.settings.NSUserDefaultsSettings
 import com.russhwolf.settings.Settings
-import com.squareup.sqldelight.db.SqlDriver
-import com.squareup.sqldelight.drivers.native.NativeSqliteDriver
-import io.ktor.client.engine.darwin.Darwin
 import org.koin.core.KoinApplication
 import org.koin.core.component.KoinComponent
 import org.koin.dsl.module
@@ -19,12 +15,6 @@ fun initKoinIos(
         single<Settings> { NSUserDefaultsSettings(userDefaults) }
     }
 )
-
-actual val platformModule = module {
-    single<SqlDriver> { NativeSqliteDriver(BrownfieldSdkDb.Schema, "BrownfieldSdkDb") }
-
-    single { Darwin.create() }
-}
 
 @Suppress("unused") // Called from Swift
 object KotlinDependencies : KoinComponent {
