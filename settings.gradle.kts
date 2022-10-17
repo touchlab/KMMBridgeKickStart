@@ -1,10 +1,8 @@
 pluginManagement {
     repositories {
         google()
-        jcenter()
         gradlePluginPortal()
         mavenCentral()
-        maven("https://oss.sonatype.org/content/repositories/snapshots")
     }
     resolutionStrategy {
         eachPlugin {
