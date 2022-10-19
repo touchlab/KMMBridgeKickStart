@@ -1,21 +1,21 @@
 package co.touchlab.brownfieldsdk
 
-import co.touchlab.stately.concurrency.AtomicReference
+import kotlinx.datetime.Clock
 
 interface Analytics {
-    fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
+    fun sendEvent(eventName: String, vararg eventArgs: Pair<String, Any>)
 }
 
-fun initAnalytics(analytics: Analytics) {
-    if (!AnalyticsHandler.analyticsAtom.compareAndSet(null, analytics)) {
-        throw IllegalStateException("Analytics can only be set once")
+fun initAnalytics(analytics: Analytics) : Analytics {
+    return object : Analytics {
+        override fun sendEvent(eventName: String, vararg eventArgs: Pair<String, Any>) {
+            // add a standard set of args to the ones supplied by the client, then, delegate the call
+            val additionalArgs = mutableListOf<Pair<String, Any>>().apply {
+                addAll(eventArgs)
+                add("_timestamp" to Clock.System.now().toEpochMilliseconds())
+            }
+
+            analytics.sendEvent(eventName, *additionalArgs.toTypedArray())
+        }
     }
-}
-
-fun sendEvent(name: String, vararg args: Pair<String, Any>) {
-    AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
-}
-
-internal object AnalyticsHandler {
-    val analyticsAtom: AtomicReference<Analytics?> = AtomicReference(null)
 }

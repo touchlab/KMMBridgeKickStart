@@ -1,8 +1,7 @@
 package co.touchlab.brownfieldsdk
 
-object HttpClientAnalytics {
-    
+class HttpClientAnalytics(private val analytics: Analytics) {
     fun logMessage(message: String) {
-        sendEvent("httpClientMessage", "message" to message)
+        analytics.sendEvent("httpClientMessage", "message" to message)
     }
 }

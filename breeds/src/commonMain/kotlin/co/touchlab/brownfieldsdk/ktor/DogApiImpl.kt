@@ -3,21 +3,21 @@ package co.touchlab.brownfieldsdk.ktor
 import co.touchlab.brownfieldsdk.BreedAnalytics
 import co.touchlab.brownfieldsdk.HttpClientAnalytics
 import co.touchlab.brownfieldsdk.response.BreedResult
-import io.ktor.client.HttpClient
-import io.ktor.client.call.body
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.logging.LogLevel
-import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.request.HttpRequestBuilder
-import io.ktor.client.request.get
-import io.ktor.http.encodedPath
-import io.ktor.http.takeFrom
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.engine.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
+import io.ktor.client.request.*
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
 
-internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
+internal class DogApiImpl(
+    engine: HttpClientEngine,
+    private val httpClientAnalytics: HttpClientAnalytics,
+    private val breedAnalytics: BreedAnalytics,
+) : DogApi {
 
     private val client = HttpClient(engine) {
         expectSuccess = true
@@ -27,7 +27,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
         install(Logging) {
             logger = object : Logger {
                 override fun log(message: String) {
-                    HttpClientAnalytics.logMessage(message)
+                    httpClientAnalytics.logMessage(message)
                 }
             }
 
@@ -42,7 +42,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
     }
 
     override suspend fun getJsonFromApi(): BreedResult {
-        BreedAnalytics.fetchingBreedsFromNetwork()
+        breedAnalytics.fetchingBreedsFromNetwork()
         return client.get {
             dogs("api/breeds/list/all")
         }.body()

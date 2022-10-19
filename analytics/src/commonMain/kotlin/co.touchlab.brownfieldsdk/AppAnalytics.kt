@@ -1,8 +1,7 @@
 package co.touchlab.brownfieldsdk
 
-object AppAnalytics {
-    
+class AppAnalytics(private val analytics: Analytics) {
     fun appStarted() {
-        sendEvent("appStarted")
+        analytics.sendEvent("appStarted")
     }
 }

@@ -16,16 +16,17 @@ abstract class BaseServiceLocator : ServiceLocator {
             dbHelper = databaseHelper,
             settings = settings,
             dogApi = dogApi,
-            clock = Clock.System
+            clock = Clock.System,
+            breedAnalytics = breedAnalytics
         )
     }
 
     private val databaseHelper: DatabaseHelper by lazy {
-        DatabaseHelper(sqlDriver = sqlDriver, backgroundDispatcher = Dispatchers.Default)
+        DatabaseHelper(sqlDriver = sqlDriver, backgroundDispatcher = Dispatchers.Default, breedAnalytics)
     }
 
     private val dogApi: DogApi by lazy {
-        DogApiImpl(engine = clientEngine)
+        DogApiImpl(engine = clientEngine, httpClientAnalytics, breedAnalytics)
     }
 
     protected abstract val sqlDriver: SqlDriver

@@ -1,48 +1,52 @@
 package co.touchlab.brownfieldsdk
 
-object BreedAnalytics {
+class BreedAnalytics(private val analytics: Analytics) {
 
     fun favoriteClicked(id: Long) {
-        sendEvent("favoriteClicked", "favoriteId" to id)
+        analytics.sendEvent("favoriteClicked", "favoriteId" to id)
     }
 
     fun favoriteSaved(id: Long, favorite: Boolean) {
-        sendEvent("favoriteSaved", "favoriteId" to id, "favoriteValue" to favorite)
+        analytics.sendEvent("favoriteSaved", "favoriteId" to id, "favoriteValue" to favorite)
     }
 
     fun displayingBreeds(size: Int) {
-        sendEvent("viewUpdatingWithBreeds", "size" to size)
+        analytics.sendEvent("viewUpdatingWithBreeds", "size" to size)
     }
 
     fun displayingError(message: String) {
-        sendEvent("viewDisplayingError", "message" to message)
+        analytics.sendEvent("viewDisplayingError", "message" to message)
     }
 
     fun refreshingBreeds() {
-        sendEvent("refreshingBreeds")
+        analytics.sendEvent("refreshingBreeds")
     }
 
     fun updatingBreedsError(throwable: Throwable) {
-        sendEvent("errorDownloadingBreedList", "throwable" to throwable)
+        analytics.sendEvent("errorDownloadingBreedList", "throwable" to throwable)
+    }
+
+    fun clearingBreedViewModel() {
+        analytics.sendEvent("clearingBreedViewModel")
     }
 
     fun fetchingBreedsFromNetwork() {
-        sendEvent("breedsFetching")
+        analytics.sendEvent("breedsFetching")
     }
 
     fun breedsFetchedFromNetwork(size: Int) {
-        sendEvent("breedsFetched", "size" to size)
+        analytics.sendEvent("breedsFetched", "size" to size)
     }
 
     fun breedsNotFetchedFromNetwork(reason: String) {
-        sendEvent("breedsNotFetchedFromNetwork", "reason" to reason)
+        analytics.sendEvent("breedsNotFetchedFromNetwork", "reason" to reason)
     }
 
     fun insertingBreedsToDatabase(size: Int) {
-        sendEvent("insertingBreedsToDatabase", "size" to size)
+        analytics.sendEvent("insertingBreedsToDatabase", "size" to size)
     }
 
     fun databaseCleared() {
-        sendEvent("breedDatabaseCleared")
+        analytics.sendEvent("breedDatabaseCleared")
     }
 }

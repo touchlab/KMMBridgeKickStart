@@ -10,7 +10,8 @@ import io.ktor.client.engine.darwin.Darwin
 import platform.Foundation.NSUserDefaults
 
 class IOSServiceLocator(
-    userDefaults: NSUserDefaults
+    userDefaults: NSUserDefaults,
+    analytics: Analytics,
 ) : BaseServiceLocator() {
 
     override val sqlDriver: SqlDriver by lazy {
@@ -20,4 +21,8 @@ class IOSServiceLocator(
     override val settings: Settings by lazy { NSUserDefaultsSettings(userDefaults) }
 
     override val clientEngine: HttpClientEngine by lazy { Darwin.create() }
+
+    override val appAnalytics by lazy { AppAnalytics(analytics) }
+    override val breedAnalytics by lazy { BreedAnalytics(analytics) }
+    override val httpClientAnalytics by lazy { HttpClientAnalytics(analytics) }
 }

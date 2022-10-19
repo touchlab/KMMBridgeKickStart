@@ -21,6 +21,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("co.touchlab:stately-concurrency:1.2.3")
+                implementation(libs.kotlinx.dateTime)
             }
         }
         val commonTest by getting {

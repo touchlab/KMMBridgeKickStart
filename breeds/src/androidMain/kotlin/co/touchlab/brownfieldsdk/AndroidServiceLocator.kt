@@ -15,7 +15,8 @@ class AndroidServiceLocator(
     sharedPreferences: SharedPreferences = context.getSharedPreferences(
         "BrownfieldSDKSettings",
         Context.MODE_PRIVATE
-    )
+    ),
+    analytics: Analytics
 ) : BaseServiceLocator() {
 
     override val sqlDriver: SqlDriver by lazy {
@@ -29,4 +30,10 @@ class AndroidServiceLocator(
     override val settings: Settings by lazy { SharedPreferencesSettings(delegate = sharedPreferences) }
 
     override val clientEngine: HttpClientEngine by lazy { OkHttp.create() }
+
+    override val appAnalytics by lazy { AppAnalytics(analytics) }
+
+    override val breedAnalytics by lazy { BreedAnalytics(analytics) }
+
+    override val httpClientAnalytics by lazy { HttpClientAnalytics(analytics) }
 }
