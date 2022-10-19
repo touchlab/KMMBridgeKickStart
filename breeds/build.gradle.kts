@@ -3,14 +3,8 @@ plugins {
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
     id("com.android.library")
-    id("maven-publish")
+    `maven-publish`
 }
-
-val GROUP: String by project
-val VERSION_NAME: String by project
-
-group = GROUP
-version = VERSION_NAME
 
 kotlin {
     android {

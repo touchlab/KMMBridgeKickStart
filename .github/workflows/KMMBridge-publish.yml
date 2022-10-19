@@ -1,13 +1,9 @@
-name: KMM Bridge Publish Release
-
+name: KMM Bridge/iOS Publish
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - "main"
-
+#  push:
+#    branches:
+#      - "main"
 jobs:
   call-kmmbridge-publish:
-    uses: touchlab/KMMBridgeGithubWorkflow/.github/workflows/faktorybuild.yml@v0.3
-    secrets:
-      PODSPEC_SSH_KEY: ${{ secrets.PODSPEC_SSH_KEY }}
+    uses: touchlab/KMMBridgeGithubWorkflow/.github/workflows/faktorybuildbranches.yml@main
