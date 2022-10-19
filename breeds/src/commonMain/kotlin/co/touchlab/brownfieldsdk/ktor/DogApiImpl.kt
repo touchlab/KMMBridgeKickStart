@@ -15,7 +15,7 @@ import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.client.plugins.logging.Logger
 
-class DogApiImpl(engine: HttpClientEngine) : DogApi {
+internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
 
     private val client = HttpClient(engine) {
         expectSuccess = true
