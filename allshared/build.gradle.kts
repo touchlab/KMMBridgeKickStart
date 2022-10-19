@@ -5,8 +5,11 @@ plugins {
     id("co.touchlab.faktory.kmmbridge")
 }
 
-group = "co.touchlab.brownfield-sdk"
-version = "1.0"
+val GROUP: String by project
+val VERSION_NAME: String by project
+
+group = GROUP
+version = VERSION_NAME
 
 kotlin {
     ios()
@@ -14,20 +17,12 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(":breeds"))
                 api(project(":analytics"))
                 implementation(libs.coroutines.core)
                 implementation(libs.bundles.ktor.common)
-                implementation(libs.touchlab.stately)
                 implementation(libs.multiplatformSettings.common)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
@@ -70,5 +65,4 @@ kmmbridge {
     githubReleaseVersions()
     cocoapods("git@github.com:touchlab/PodSpecs.git")
     versionPrefix.set("1.0")
-    timestampVersions()
 }

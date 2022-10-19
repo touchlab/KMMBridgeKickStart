@@ -1,7 +1,6 @@
 package co.touchlab.brownfieldsdk.ktor
 
 import co.touchlab.brownfieldsdk.response.BreedResult
-import co.touchlab.stately.ensureNeverFrozen
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
@@ -14,9 +13,9 @@ import io.ktor.client.request.get
 import io.ktor.http.encodedPath
 import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
-import io.ktor.client.plugins.logging.Logger as KtorLogger
+import io.ktor.client.plugins.logging.Logger
 
-class DogApiImpl(engine: HttpClientEngine) : DogApi {
+internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
 
     private val client = HttpClient(engine) {
         expectSuccess = true
@@ -24,7 +23,7 @@ class DogApiImpl(engine: HttpClientEngine) : DogApi {
             json()
         }
         install(Logging) {
-            logger = object : KtorLogger {
+            logger = object : Logger {
                 override fun log(message: String) {
 //                    log.v { message }
                 }
@@ -38,10 +37,6 @@ class DogApiImpl(engine: HttpClientEngine) : DogApi {
             requestTimeoutMillis = timeout
             socketTimeoutMillis = timeout
         }
-    }
-
-    init {
-        ensureNeverFrozen()
     }
 
     override suspend fun getJsonFromApi(): BreedResult {

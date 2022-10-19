@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -7,8 +6,11 @@ plugins {
     id("maven-publish")
 }
 
-group = "co.touchlab.brownfield-sdk"
-version = "1.0"
+val GROUP: String by project
+val VERSION_NAME: String by project
+
+group = GROUP
+version = VERSION_NAME
 
 kotlin {
     android {
@@ -19,18 +21,10 @@ kotlin {
     iosSimulatorArm64()
 
     sourceSets {
-        all {
-            languageSettings.apply {
-                optIn("kotlin.RequiresOptIn")
-                optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines.core)
                 implementation(libs.bundles.ktor.common)
-                implementation(libs.touchlab.stately)
                 implementation(libs.multiplatformSettings.common)
                 implementation(libs.kotlinx.dateTime)
                 implementation(libs.touchlab.kermit)
@@ -70,17 +64,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 33
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 33
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
-        }
+        @Suppress("UnstableApiUsage")
+        minSdk = libs.versions.minSdk.get().toInt()
     }
 }
 
