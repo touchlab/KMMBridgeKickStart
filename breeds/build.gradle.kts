@@ -65,11 +65,10 @@ kotlin {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = 21
-        targetSdk = 33
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        @Suppress("UnstableApiUsage")
+        minSdk = libs.versions.minSdk.get().toInt()
     }
 }
 
