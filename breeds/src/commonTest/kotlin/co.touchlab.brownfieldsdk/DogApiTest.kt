@@ -2,10 +2,6 @@ package co.touchlab.brownfieldsdk
 
 import co.touchlab.brownfieldsdk.ktor.DogApiImpl
 import co.touchlab.brownfieldsdk.response.BreedResult
-import co.touchlab.kermit.LogWriter
-import co.touchlab.kermit.Logger
-import co.touchlab.kermit.LoggerConfig
-import co.touchlab.kermit.Severity
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.ClientRequestException
@@ -19,14 +15,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
 class DogApiTest {
-    private val emptyLogger = Logger(
-        config = object : LoggerConfig {
-            override val logWriterList: List<LogWriter> = emptyList()
-            override val minSeverity: Severity = Severity.Assert
-        },
-        tag = ""
-    )
-
     @Test
     fun success() = runTest {
         val engine = MockEngine {
@@ -36,7 +24,7 @@ class DogApiTest {
                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString())
             )
         }
-        val dogApi = DogApiImpl(emptyLogger, engine)
+        val dogApi = DogApiImpl(engine)
 
         val result = dogApi.getJsonFromApi()
         assertEquals(
@@ -59,7 +47,7 @@ class DogApiTest {
                 status = HttpStatusCode.NotFound
             )
         }
-        val dogApi = DogApiImpl(emptyLogger, engine)
+        val dogApi = DogApiImpl(engine)
 
         assertFailsWith<ClientRequestException> {
             dogApi.getJsonFromApi()

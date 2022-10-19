@@ -1,7 +1,5 @@
 package co.touchlab.brownfieldsdk
 
-import co.touchlab.kermit.Logger
-import co.touchlab.kermit.StaticConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -22,7 +20,6 @@ class SqlDelightTest {
     fun setup() = runTest {
         dbHelper = DatabaseHelper(
             testDbConnection(),
-            Logger(StaticConfig()),
             Dispatchers.Default
         )
         dbHelper.deleteAll()

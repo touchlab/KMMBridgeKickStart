@@ -5,8 +5,6 @@ import co.touchlab.brownfieldsdk.db.Breed
 import co.touchlab.brownfieldsdk.mock.ClockMock
 import co.touchlab.brownfieldsdk.mock.DogApiMock
 import co.touchlab.brownfieldsdk.repository.BreedRepository
-import co.touchlab.kermit.Logger
-import co.touchlab.kermit.StaticConfig
 import com.russhwolf.settings.MapSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
@@ -19,11 +17,9 @@ import kotlin.time.Duration.Companion.hours
 
 class BreedRepositoryTest {
 
-    private var kermit = Logger(StaticConfig())
     private var testDbConnection = testDbConnection()
     private var dbHelper = DatabaseHelper(
         testDbConnection,
-        kermit,
         Dispatchers.Default
     )
     private val settings = MapSettings()
@@ -32,7 +28,7 @@ class BreedRepositoryTest {
     // Need to start at non-zero time because the default value for db timestamp is 0
     private val clock = ClockMock(Clock.System.now())
 
-    private val repository: BreedRepository = BreedRepository(dbHelper, settings, ktorApi, kermit, clock)
+    private val repository: BreedRepository = BreedRepository(dbHelper, settings, ktorApi, clock)
 
     companion object {
         private val appenzeller = Breed(1, "appenzeller", false)
