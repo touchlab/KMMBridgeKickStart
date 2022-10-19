@@ -7,6 +7,7 @@ import co.touchlab.brownfieldsdk.mock.DogApiMock
 import co.touchlab.brownfieldsdk.repository.BreedRepository
 import com.russhwolf.settings.MapSettings
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlin.test.AfterTest
@@ -15,6 +16,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFails
 import kotlin.time.Duration.Companion.hours
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class BreedRepositoryTest {
 
     private var testDbConnection = testDbConnection()
