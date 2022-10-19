@@ -51,6 +51,7 @@ kotlin {
         summary = "Brownfield sample"
         homepage = "https://www.touchlab.co"
         ios.deploymentTarget = "13.5"
+        extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
         framework {
             export(project(":analytics"))
             export(project(":breeds"))
