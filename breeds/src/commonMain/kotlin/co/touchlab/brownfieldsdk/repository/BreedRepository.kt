@@ -1,8 +1,10 @@
 package co.touchlab.brownfieldsdk.repository
 
+import co.touchlab.brownfieldsdk.BreedAnalytics
 import co.touchlab.brownfieldsdk.DatabaseHelper
 import co.touchlab.brownfieldsdk.db.Breed
 import co.touchlab.brownfieldsdk.ktor.DogApi
+import co.touchlab.brownfieldsdk.response.BreedResult
 import com.russhwolf.settings.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Clock
@@ -13,8 +15,6 @@ class BreedRepository internal constructor(
     private val dogApi: DogApi,
     private val clock: Clock
 ) {
-
-//    private val log = log.withTag("BreedModel")
 
     companion object {
         internal const val DB_TIMESTAMP_KEY = "DbTimestampKey"
@@ -30,9 +30,8 @@ class BreedRepository internal constructor(
 
     suspend fun refreshBreeds() {
         val breedResult = dogApi.getJsonFromApi()
-//        log.v { "Breed network result: ${breedResult.status}" }
         val breedList = breedResult.message.keys.sorted().toList()
-//        log.v { "Fetched ${breedList.size} breeds from network" }
+        BreedAnalytics.breedsFetchedFromNetwork(breedList.size)
         settings.putLong(DB_TIMESTAMP_KEY, clock.now().toEpochMilliseconds())
 
         if (breedList.isNotEmpty()) {
@@ -49,7 +48,7 @@ class BreedRepository internal constructor(
         val oneHourMS = 60 * 60 * 1000
         val stale = lastDownloadTimeMS + oneHourMS < clock.now().toEpochMilliseconds()
         if (!stale) {
-//            log.i { "Breeds not fetched from network. Recently updated" }
+            BreedAnalytics.breedsNotFetchedFromNetwork("Recently updated")
         }
         return stale
     }

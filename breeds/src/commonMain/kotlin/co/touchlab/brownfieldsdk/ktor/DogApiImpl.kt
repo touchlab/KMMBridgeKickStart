@@ -1,5 +1,7 @@
 package co.touchlab.brownfieldsdk.ktor
 
+import co.touchlab.brownfieldsdk.BreedAnalytics
+import co.touchlab.brownfieldsdk.HttpClientAnalytics
 import co.touchlab.brownfieldsdk.response.BreedResult
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -25,7 +27,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
         install(Logging) {
             logger = object : Logger {
                 override fun log(message: String) {
-//                    log.v { message }
+                    HttpClientAnalytics.logMessage(message)
                 }
             }
 
@@ -40,7 +42,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
     }
 
     override suspend fun getJsonFromApi(): BreedResult {
-//        log.d { "Fetching Breeds from network" }
+        BreedAnalytics.fetchingBreedsFromNetwork()
         return client.get {
             dogs("api/breeds/list/all")
         }.body()

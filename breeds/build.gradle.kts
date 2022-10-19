@@ -23,6 +23,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":analytics"))
                 implementation(libs.coroutines.core)
                 implementation(libs.bundles.ktor.common)
                 implementation(libs.multiplatformSettings.common)
