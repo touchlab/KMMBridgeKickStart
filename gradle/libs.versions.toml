@@ -27,7 +27,6 @@ robolectric = "4.8.2"
 kermit = "1.1.3"
 stately = "1.2.3"
 
-koin = "3.2.0"
 multiplatformSettings = "1.0.0-alpha01"
 turbine = "0.8.0"
 sqlDelight = "1.5.3"
@@ -39,9 +38,6 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
-
-koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 kotlinx-dateTime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
@@ -79,7 +75,6 @@ ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-serializa
 shared-commonTest = [
     "kotlin-test",
     "multiplatformSettings-test",
-    "koin-test",
     "turbine",
     "coroutines-test",
     "ktor-client-mock"

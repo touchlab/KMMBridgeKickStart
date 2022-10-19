@@ -18,7 +18,6 @@ rootProject.name = "BrownfieldSDK"
 
 enableFeaturePreview("VERSION_CATALOGS")
 
-include("umbrellamodule")
-include("umbrellamodule:analytics")
-include("umbrellamodule:breeds")
-include("umbrellamodule:breeds:database")
+include("allshared")
+include("analytics")
+include("breeds")
