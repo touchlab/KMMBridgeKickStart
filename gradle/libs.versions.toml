@@ -8,7 +8,6 @@ compileSdk = "33"
 
 # Dependencies
 android-gradle-plugin = "7.2.2" # Don't bump to 7.3.x until Intellij supports it (unless you're ok with only Android Studio)
-ktlint-gradle = "11.0.0"
 gradle-versions = "0.42.0"
 
 kmmBridge = "0.2.2"
@@ -65,7 +64,6 @@ turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
 [plugins]
-ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 
 [bundles]
