@@ -67,7 +67,7 @@ android {
 }
 
 sqldelight {
-    database("BrownfieldSdkDb") {
-        packageName = "co.touchlab.brownfieldsdk.db"
+    database("KMMBridgeKickStartDb") {
+        packageName = "co.touchlab.kmmbridgekickstart.db"
     }
 }
