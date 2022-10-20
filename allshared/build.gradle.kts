@@ -15,7 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(project(":breeds"))
-//                api(project(":analytics"))
+                api(project(":analytics"))
             }
         }
         val commonTest by getting {
