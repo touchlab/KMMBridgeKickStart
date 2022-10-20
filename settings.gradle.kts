@@ -5,7 +5,7 @@ pluginManagement {
         mavenCentral()
     }
 }
-rootProject.name = "BrownfieldSDK"
+rootProject.name = "KMMBridgeKickStart"
 
 enableFeaturePreview("VERSION_CATALOGS")
 
