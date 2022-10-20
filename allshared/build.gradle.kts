@@ -36,6 +36,11 @@ kotlin {
     cocoapods {
         summary = "KMMBridgeKickStart sample"
         homepage = "https://www.touchlab.co"
+        license = """{ :type => 'MIT', :text => <<-LICENSE
+            Copyright 2012
+            Permission is granted to...
+            LICENSE
+        }"""
         ios.deploymentTarget = "13.5"
         extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
         framework {
@@ -46,12 +51,21 @@ kotlin {
     }
 }
 
-addGithubPackagesRepository()
+publishing {
+    repositories {
+        maven {
+            name = "myRepo"
+            url = uri(layout.buildDirectory.dir("my-local-repo"))
+        }
+    }
+}
+//addGithubPackagesRepository()
 
 kmmbridge {
     mavenPublishArtifacts()
     githubReleaseVersions()
     spm()
-    cocoapods()
+    cocoapods(allowWarnings = false,
+    verboseErrors = true)
 //    cocoapods("git@github.com:touchlab/PodSpecs.git")
 }
