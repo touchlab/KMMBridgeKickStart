@@ -1,16 +1,42 @@
 plugins {
-    id("java")
+    kotlin("multiplatform")
+    id("com.android.library")
+    `maven-publish`
 }
 
-repositories {
-    mavenCentral()
+kotlin {
+    android {
+        publishAllLibraryVariants()
+    }
+    ios()
+    iosSimulatorArm64()
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation("co.touchlab:stately-concurrency:1.2.3")
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+        val iosMain by getting
+        val iosTest by getting
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+        val iosSimulatorArm64Test by getting {
+            dependsOn(iosTest)
+        }
+    }
 }
 
-dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
-}
-
-tasks.getByName<Test>("test") {
-    useJUnitPlatform()
+android {
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        @Suppress("UnstableApiUsage")
+        minSdk = libs.versions.minSdk.get().toInt()
+    }
 }

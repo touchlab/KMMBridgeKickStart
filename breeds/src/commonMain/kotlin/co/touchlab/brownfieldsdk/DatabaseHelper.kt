@@ -24,7 +24,7 @@ internal class DatabaseHelper(
             .flowOn(backgroundDispatcher)
 
     suspend fun insertBreeds(breeds: List<String>) {
-        // log.d { "Inserting ${breeds.size} breeds into database" }
+        BreedAnalytics.insertingBreedsToDatabase(breeds.size)
         dbRef.transactionWithContext(backgroundDispatcher) {
             breeds.forEach { breed ->
                 dbRef.tableQueries.insertBreed(breed)
@@ -40,14 +40,14 @@ internal class DatabaseHelper(
             .flowOn(backgroundDispatcher)
 
     suspend fun deleteAll() {
-        // log.i { "Database Cleared" }
+        BreedAnalytics.databaseCleared()
         dbRef.transactionWithContext(backgroundDispatcher) {
             dbRef.tableQueries.deleteAll()
         }
     }
 
     suspend fun updateFavorite(breedId: Long, favorite: Boolean) {
-        // log.i { "Breed $breedId: Favorited $favorite" }
+        BreedAnalytics.favoriteSaved(id = breedId, favorite = favorite)
         dbRef.transactionWithContext(backgroundDispatcher) {
             dbRef.tableQueries.updateFavorite(favorite, breedId)
         }
