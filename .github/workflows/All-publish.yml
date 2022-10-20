@@ -1,0 +1,11 @@
+name: All Publish
+on:
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - "main"
+jobs:
+  call-kmmbridge-publish:
+    uses: touchlab/KMMBridgeGithubWorkflow/.github/workflows/faktorybuildbranches.yml@main
+    with:
+      publishTask: kmmBridgePublish publishAndroidDebugPublicationToGitHubPackagesRepository publishAndroidReleasePublicationToGitHubPackagesRepository
