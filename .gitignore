@@ -141,5 +141,3 @@ Dependencies/
 *.xcbkptlist
 !/.idea/codeStyles/*
 !/.idea/inspectionProfiles/*
-.faktory
-*.podspec
