@@ -2,15 +2,11 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
-    id("com.android.library")
     id("co.touchlab.faktory.kmmbridge")
     `maven-publish`
 }
 
 kotlin {
-    android {
-        publishAllLibraryVariants()
-    }
     ios()
     // Note: iosSimulatorArm64 target requires that all dependencies have M1 support
     iosSimulatorArm64()
@@ -18,7 +14,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":breeds"))
+                implementation(project(":breeds"))
                 api(project(":analytics"))
             }
         }
@@ -44,17 +40,8 @@ kotlin {
         extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
         framework {
             export(project(":analytics"))
-            export(project(":breeds"))
             isStatic = true
         }
-    }
-}
-
-android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
-    defaultConfig {
-        @Suppress("UnstableApiUsage")
-        minSdk = libs.versions.minSdk.get().toInt()
     }
 }
 

@@ -12,7 +12,7 @@ fun initAnalytics(analytics: Analytics) {
     }
 }
 
-fun sendEvent(name: String, vararg args: Pair<String, Any>) {
+internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
     AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
 }
 

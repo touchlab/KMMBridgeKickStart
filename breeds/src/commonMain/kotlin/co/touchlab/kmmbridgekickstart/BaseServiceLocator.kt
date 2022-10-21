@@ -9,7 +9,10 @@ import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
 
-abstract class BaseServiceLocator : ServiceLocator {
+internal const val SETTINGS_KEY = "KMMBridgeKickStartSettings"
+internal const val DB_NAME = "KMMBridgeKickStartDb"
+
+internal abstract class BaseServiceLocator : ServiceLocator {
 
     override val breedRepository: BreedRepository by lazy {
         BreedRepository(

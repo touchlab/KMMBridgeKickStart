@@ -2,6 +2,6 @@ package co.touchlab.kmmbridgekickstart
 
 import co.touchlab.kmmbridgekickstart.repository.BreedRepository
 
-interface ServiceLocator {
+internal interface ServiceLocator {
     val breedRepository: BreedRepository
 }

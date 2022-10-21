@@ -1,32 +1,40 @@
 package co.touchlab.kmmbridgekickstart
 
 import android.content.Context
-import android.content.SharedPreferences
 import co.touchlab.kmmbridgekickstart.db.KMMBridgeKickStartDb
+import co.touchlab.kmmbridgekickstart.repository.BreedRepository
 import com.russhwolf.settings.Settings
 import com.russhwolf.settings.SharedPreferencesSettings
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.engine.*
+import io.ktor.client.engine.okhttp.*
 
-class AndroidServiceLocator(
-    context: Context,
-    sharedPreferences: SharedPreferences = context.getSharedPreferences(
-        "KMMBridgeKickStartSettings",
-        Context.MODE_PRIVATE
-    )
+fun breedStartup(context: Context): BreedRepository {
+    val locator = AndroidServiceLocator(context)
+    return locator.breedRepository
+}
+
+internal class AndroidServiceLocator(
+    context: Context
 ) : BaseServiceLocator() {
 
     override val sqlDriver: SqlDriver by lazy {
         AndroidSqliteDriver(
             schema = KMMBridgeKickStartDb.Schema,
             context = context,
-            name = "KMMBridgeKickStartDb"
+            name = DB_NAME
         )
     }
 
-    override val settings: Settings by lazy { SharedPreferencesSettings(delegate = sharedPreferences) }
+    override val settings: Settings by lazy {
+        SharedPreferencesSettings(
+            delegate = context.getSharedPreferences(
+                SETTINGS_KEY,
+                Context.MODE_PRIVATE
+            )
+        )
+    }
 
     override val clientEngine: HttpClientEngine by lazy { OkHttp.create() }
 }

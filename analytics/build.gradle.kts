@@ -40,3 +40,5 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
     }
 }
+
+addGithubPackagesRepository()
