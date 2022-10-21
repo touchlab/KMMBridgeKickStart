@@ -50,6 +50,14 @@ kotlin {
     }
 }
 
+android {
+    compileSdk = libs.versions.compileSdk.get().toInt()
+    defaultConfig {
+        @Suppress("UnstableApiUsage")
+        minSdk = libs.versions.minSdk.get().toInt()
+    }
+}
+
 addGithubPackagesRepository()
 
 kmmbridge {
