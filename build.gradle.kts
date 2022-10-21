@@ -10,7 +10,6 @@ plugins {
 allprojects {
     repositories {
         google()
-        mavenLocal()
         mavenCentral()
     }
 }

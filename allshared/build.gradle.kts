@@ -2,11 +2,15 @@
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
+    id("com.android.library")
     id("co.touchlab.faktory.kmmbridge")
     `maven-publish`
 }
 
 kotlin {
+    android {
+        publishAllLibraryVariants()
+    }
     ios()
     // Note: iosSimulatorArm64 target requires that all dependencies have M1 support
     iosSimulatorArm64()
