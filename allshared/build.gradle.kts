@@ -41,7 +41,6 @@ kotlin {
 
         framework {
             export(project(":analytics"))
-            baseName = "AllSharedKotlin"
             isStatic = true
         }
     }
@@ -53,6 +52,5 @@ kmmbridge {
     mavenPublishArtifacts()
     githubReleaseVersions()
     spm()
-    cocoapods()
 //    cocoapods("git@github.com:touchlab/PodSpecs.git")
 }
