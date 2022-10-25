@@ -2,11 +2,11 @@
 
 This is a sample of what a production app might look like when using [KMMBridge](https://github.com/touchlab/KMMBridge/). It's intended to help get you started integrating a Kotlin Mutliplatform Mobile shared library into your production code.
 
+Read the [tutorial blog post](https://touchlab.co/quick-start-with-kmmbridge-1-hour-tutorial/) for more detailed info.
+
 This is still a work in progress so some details might be changing. Feel free to open an issue if you see something that could be improved!
 
 ## Structure
-
-The project is split across three different repositories. This one holds the shared code, and there are separate repos for the [Android](https://github.com/touchlab/Brownfield-Android) and [iOS](https://github.com/touchlab/Brownfield-iOS) code that consume it.
 
 This repository is split into the following modules:
 
