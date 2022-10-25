@@ -1,4 +1,4 @@
-# Brownfield-SDK
+# KMMBridgeKickStart
 
 This is a sample of what a production app might look like when using [KMMBridge](https://github.com/touchlab/KMMBridge/). It's intended to help get you started integrating a Kotlin Mutliplatform Mobile shared library into your production code.
 
@@ -24,4 +24,3 @@ This repository is split into the following modules:
 `database` includes the storage logic for the `breeds` feature. Because it lives in a separate module which is not exported, SqlDelight definitions are not unnecessarily exported to iOS.
 
 The Android repository consumes `breeds` amd `analytics` as separate modules, while the iOS repository consumes the `allshared` module via the published framework.
-

@@ -3,14 +3,8 @@ plugins {
     kotlin("plugin.serialization")
     id("com.squareup.sqldelight")
     id("com.android.library")
-    id("maven-publish")
+    `maven-publish`
 }
-
-val GROUP: String by project
-val VERSION_NAME: String by project
-
-group = GROUP
-version = VERSION_NAME
 
 kotlin {
     android {
@@ -23,6 +17,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":analytics"))
                 implementation(libs.coroutines.core)
                 implementation(libs.bundles.ktor.common)
                 implementation(libs.multiplatformSettings.common)
@@ -71,8 +66,10 @@ android {
     }
 }
 
+addGithubPackagesRepository()
+
 sqldelight {
-    database("BrownfieldSdkDb") {
-        packageName = "co.touchlab.brownfieldsdk.db"
+    database("KMMBridgeKickStartDb") {
+        packageName = "co.touchlab.kmmbridgekickstart.db"
     }
 }

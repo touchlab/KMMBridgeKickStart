@@ -3,13 +3,8 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("co.touchlab.faktory.kmmbridge")
+    `maven-publish`
 }
-
-val GROUP: String by project
-val VERSION_NAME: String by project
-
-group = GROUP
-version = VERSION_NAME
 
 kotlin {
     ios()
@@ -19,13 +14,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(project(":breeds"))
+                implementation(project(":breeds"))
                 api(project(":analytics"))
-                implementation(libs.coroutines.core)
-                implementation(libs.bundles.ktor.common)
-                implementation(libs.multiplatformSettings.common)
-                implementation(libs.kotlinx.dateTime)
-                implementation(libs.touchlab.kermit)
             }
         }
         val commonTest by getting {
@@ -33,11 +23,7 @@ kotlin {
                 implementation(libs.bundles.shared.commonTest)
             }
         }
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.ktor.client.ios)
-            }
-        }
+        val iosMain by getting
         val iosTest by getting
         val iosSimulatorArm64Main by getting {
             dependsOn(iosMain)
@@ -48,21 +34,23 @@ kotlin {
     }
 
     cocoapods {
-        summary = "Brownfield sample"
+        summary = "KMMBridgeKickStart sample"
         homepage = "https://www.touchlab.co"
         ios.deploymentTarget = "13.5"
         extraSpecAttributes["libraries"] = "'c++', 'sqlite3'"
+
         framework {
             export(project(":analytics"))
-            export(project(":breeds"))
             isStatic = true
         }
     }
 }
 
+addGithubPackagesRepository()
+
 kmmbridge {
-    githubReleaseArtifacts()
+    mavenPublishArtifacts()
     githubReleaseVersions()
-    cocoapods("git@github.com:touchlab/PodSpecs.git")
-    versionPrefix.set("1.0")
+    spm()
+//    cocoapods("git@github.com:touchlab/PodSpecs.git")
 }
