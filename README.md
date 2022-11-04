@@ -11,16 +11,17 @@ This is still a work in progress so some details might be changing. Feel free to
 This repository is split into the following modules:
 
     allshared
-    ├── analytics
-    ├── breeds
-        ├── database
+    analytics
+    breeds
 
 `allshared` only has iOS sources. It can include any iOS-specific API surface (eg callback wrappers around suspend funs) and exports `analytics` and `breeds` but not `database`. This is the module where KMMBridge is configured.
 
-`analytics` is a module to make analytics calls. This is often a thing teams try to integrate first when introducing KMM, so it can provide a template for introducing shared analytics into your own project.
+`analytics` is a module to make analytics calls. This is often a thing teams try to integrate first when introducing
+KMM, so it can provide a template for introducing shared analytics into your own project.
 
-`breeds` is a model of a more complicated feature. It's structured around a `BreedRepository` which is able to list dog breeds and mark them as favorites.
+`breeds` is a model of a more complicated feature. It's structured around a `BreedRepository` which is able to list dog
+breeds and mark them as favorites. It also includes the storage logic. Because it lives in a separate module
+from `allshared` which is not exported, SqlDelight definitions are not unnecessarily exported to iOS.
 
-`database` includes the storage logic for the `breeds` feature. Because it lives in a separate module which is not exported, SqlDelight definitions are not unnecessarily exported to iOS.
-
-The Android repository consumes `breeds` amd `analytics` as separate modules, while the iOS repository consumes the `allshared` module via the published framework.
+The Android repository consumes `breeds` amd `analytics` as separate modules, while the iOS repository consumes
+the `allshared` module via the published framework.
