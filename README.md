@@ -2,17 +2,11 @@
 
 This is a sample of what a production app might look like when using [KMMBridge](https://github.com/touchlab/KMMBridge/). It's intended to help get you started integrating a Kotlin Mutliplatform Mobile shared library into your production code.
 
-Read the [tutorial blog post](https://touchlab.co/quick-start-with-kmmbridge-1-hour-tutorial/) for more detailed info.
-
 This is still a work in progress so some details might be changing. Feel free to open an issue if you see something that could be improved!
 
 ## Structure
 
 This repository is split into the following modules:
-
-    allshared
-    analytics
-    breeds
 
 `allshared` only has iOS sources. It can include any iOS-specific API surface (eg callback wrappers around suspend funs) and exports `analytics` and `breeds` but not `database`. This is the module where KMMBridge is configured.
 
@@ -25,3 +19,21 @@ from `allshared` which is not exported, SqlDelight definitions are not unnecessa
 
 The Android repository consumes `breeds` amd `analytics` as separate modules, while the iOS repository consumes
 the `allshared` module via the published framework.
+
+## Usage
+
+### 1) Use This Template Repo to Create Your Kotlin Repo
+
+Click “Use Template”, give your repo a name, and create it.
+
+### 2) Edit GROUP
+
+Add a group string to your repo. You can open gradle.properties and edit GROUP.
+
+### 3) Publish A Build
+
+After the repo has been created and GROUP has been specified, go to “Actions” and run one of the available CI workflows.
+KMM Bridge/iOS Publish will build and publish just the iOS SDK. All Publish Will publish iOS and Android binaries.
+
+For more detailed info and for next steps see
+this [tutorial blog post](https://touchlab.co/quick-start-with-kmmbridge-1-hour-tutorial/).
