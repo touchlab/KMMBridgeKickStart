@@ -1,6 +1,6 @@
 package co.touchlab.kmmbridgekickstart
 
-internal object AppAnalytics {
+object AppAnalytics {
     fun appStarted() {
         sendEvent("appStarted")
     }
