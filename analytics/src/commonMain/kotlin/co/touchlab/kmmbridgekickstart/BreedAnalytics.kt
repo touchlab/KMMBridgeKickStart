@@ -26,6 +26,10 @@ object BreedAnalytics {
         sendEvent("errorDownloadingBreedList", "throwable" to throwable)
     }
 
+    fun clearingBreedViewModel() {
+        sendEvent("clearingBreedViewModel")
+    }
+
     fun fetchingBreedsFromNetwork() {
         sendEvent("breedsFetching")
     }

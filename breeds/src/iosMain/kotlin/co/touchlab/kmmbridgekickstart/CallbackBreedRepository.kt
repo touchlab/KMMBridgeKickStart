@@ -5,8 +5,6 @@ import co.touchlab.kmmbridgekickstart.repository.BreedRepository
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-fun startBreedSDK(): CallbackBreedRepository = CallbackBreedRepository(breedStartup())
-
 class CallbackBreedRepository(private val breedRepository: BreedRepository) {
     private val mainScope = MainScope()
 
