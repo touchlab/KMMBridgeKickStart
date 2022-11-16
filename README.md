@@ -1,8 +1,16 @@
 # KMMBridgeKickStart
 
-This is a sample of what a production app might look like when using [KMMBridge](https://github.com/touchlab/KMMBridge/). It's intended to help get you started integrating a Kotlin Mutliplatform Mobile shared library into your production code.
+This is a sample of what a production app might look like when using
+[KMMBridge](https://github.com/touchlab/KMMBridge/).
+It's intended to help get you started integrating a Kotlin Mutliplatform Mobile shared library into your production
+code.
 
-This is still a work in progress so some details might be changing. Feel free to open an issue if you see something that could be improved!
+We created sample [Android](https://github.com/touchlab/KMMBridgeKickStart-Android)
+and [iOS](https://github.com/touchlab/KMMBridgeKickStart-iOS) projects to illustrate
+a simple usage of this SDK.
+
+This is still a work in progress so some details might be changing. Feel free to open an issue if you see something that
+could be improved!
 
 ## Structure
 
