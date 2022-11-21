@@ -1,9 +1,12 @@
 package co.touchlab.kmmbridgekickstart
 
-fun startSDK(analytics: Analytics): SDKHandle {
+import android.content.Context
+
+fun startSDK(analytics: Analytics, context: Context): SDKHandle {
     val analyticsHandle = initAnalytics(analytics)
+    val breedRepository = breedStartup(context, analyticsHandle)
     return SDKHandle(
-        breedRepository = CallbackBreedRepository(breedRepository = breedStartup(analyticsHandle)),
+        breedRepository = breedRepository,
         appAnalytics = analyticsHandle.appAnalytics,
         breedAnalytics = analyticsHandle.breedAnalytics
     )

@@ -12,7 +12,8 @@ class BreedRepository internal constructor(
     private val dbHelper: DatabaseHelper,
     private val settings: Settings,
     private val dogApi: DogApi,
-    private val clock: Clock
+    private val clock: Clock,
+    private val breedAnalytics: BreedAnalytics
 ) {
 
     companion object {
@@ -30,7 +31,7 @@ class BreedRepository internal constructor(
     suspend fun refreshBreeds() {
         val breedResult = dogApi.getJsonFromApi()
         val breedList = breedResult.message.keys.sorted().toList()
-        BreedAnalytics.breedsFetchedFromNetwork(breedList.size)
+        breedAnalytics.breedsFetchedFromNetwork(breedList.size)
         settings.putLong(DB_TIMESTAMP_KEY, clock.now().toEpochMilliseconds())
 
         if (breedList.isNotEmpty()) {
@@ -47,7 +48,7 @@ class BreedRepository internal constructor(
         val oneHourMS = 60 * 60 * 1000
         val stale = lastDownloadTimeMS + oneHourMS < clock.now().toEpochMilliseconds()
         if (!stale) {
-            BreedAnalytics.breedsNotFetchedFromNetwork("Recently updated")
+            breedAnalytics.breedsNotFetchedFromNetwork("Recently updated")
         }
         return stale
     }

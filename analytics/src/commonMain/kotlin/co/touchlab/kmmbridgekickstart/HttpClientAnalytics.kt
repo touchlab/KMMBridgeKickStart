@@ -1,6 +1,7 @@
 package co.touchlab.kmmbridgekickstart
 
-object HttpClientAnalytics {
+class HttpClientAnalytics internal constructor() {
+    
     fun logMessage(message: String) {
         sendEvent("httpClientMessage", "message" to message)
     }

@@ -17,7 +17,11 @@ import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.client.plugins.logging.Logger
 
-internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
+internal class DogApiImpl(
+    engine: HttpClientEngine,
+    private val httpClientAnalytics: HttpClientAnalytics,
+    private val breedAnalytics: BreedAnalytics
+) : DogApi {
 
     private val client = HttpClient(engine) {
         expectSuccess = true
@@ -27,7 +31,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
         install(Logging) {
             logger = object : Logger {
                 override fun log(message: String) {
-                    HttpClientAnalytics.logMessage(message)
+                    httpClientAnalytics.logMessage(message)
                 }
             }
 
@@ -42,7 +46,7 @@ internal class DogApiImpl(engine: HttpClientEngine) : DogApi {
     }
 
     override suspend fun getJsonFromApi(): BreedResult {
-        BreedAnalytics.fetchingBreedsFromNetwork()
+        breedAnalytics.fetchingBreedsFromNetwork()
         return client.get {
             dogs("api/breeds/list/all")
         }.body()
