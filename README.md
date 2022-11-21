@@ -43,32 +43,43 @@ this [tutorial blog post](https://touchlab.co/quick-start-with-kmmbridge-1-hour-
 
 ### Android
 
-Initialize analytics in `onCreate` of your main `application` by calling
+Add dependencies in your build.gradle file
 
 ```kotlin
-initAnalytics(AnalyticsImpl)
+implementation("co.touchlab.kmmbridgekickstart:breeds:${VERSION}")
+implementation("co.touchlab.kmmbridgekickstart:analytics:${VERSION}")
 ```
 
-with your implementation of the `Analytics` interface.
+Initialize the SDK in `onCreate` of your main `application` by calling
+
+```kotlin
+val sdkHandle = startSDK(analytics = AnalyticsImpl, context = this)
+```
+
+with your implementation of the `Analytics` interface and application context, keep returned `SDKHandle` to have access
+to the `CallbackBreedRepository` and analytics.
 
 (Optional) log the app start
 
 ```kotlin
-AppAnalytics.appStarted()
+sdkHandle.appAnalytics.appStarted()
 ```
 
-Define BreedRepository in your dependency injection module, it is returned by a `breedStartup` method
+Now you can inject the BreedRepository and Analytics classes into your ViewModel and use all its methods by using
 
 ```kotlin
-module {
-    single<Context> { this@MainApp }
-    single { breedStartup(context = get()) }
-}
+sdkHandle.breedRepository
+sdkHandle.appAnalytics
+sdkHandle.breedAnalytics
 ```
 
-Now you can inject the BreedRepository into your ViewModel and use all its methods.
-
 ### iOS
+
+Import the `allshared` module
+
+```
+import allshared
+```
 
 Initialize the SDK in `init` function in the `App` class
 
@@ -80,11 +91,11 @@ init() {
 
 with your implementation of the `Analytics` interface.
 
-The `startSDK` function returns `SDKHandle` data class that holds the `CallbackBreedRepository`, which your View Model
-can use to access the data and functions.
+The `startSDK` function returns `SDKHandle` data class that holds the `CallbackBreedRepository` and analytics classes,
+which your View Model can use to access the data and functions.
 
 (Optional) log the app start
 
 ```
-AppAnalytics().appStarted()
+handle.appAnalytics().appStarted()
 ```
