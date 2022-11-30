@@ -16,7 +16,8 @@ could be improved!
 
 This repository is split into the following modules:
 
-`allshared` only has iOS sources. It can include any iOS-specific API surface (eg callback wrappers around suspend funs) and exports `analytics` and `breeds` but not `database`. This is the module where KMMBridge is configured.
+`allshared` only has iOS sources. It can include any iOS-specific API surface (e.g. callback wrappers around suspend
+functions) and exports `analytics` and `breeds` but not `database`. This is the module where KMMBridge is configured.
 
 `analytics` is a module to make analytics calls. This is often a thing teams try to integrate first when introducing
 KMM, so it can provide a template for introducing shared analytics into your own project.
@@ -45,3 +46,64 @@ KMM Bridge/iOS Publish will build and publish just the iOS SDK. All Publish Will
 
 For more detailed info and for next steps see
 this [tutorial blog post](https://touchlab.co/quick-start-with-kmmbridge-1-hour-tutorial/).
+
+## SDK Initialization
+
+### Android
+
+Add dependencies in your build.gradle file
+
+```kotlin
+implementation("co.touchlab.kmmbridgekickstart:breeds:${VERSION}")
+implementation("co.touchlab.kmmbridgekickstart:analytics:${VERSION}")
+```
+
+Initialize the SDK in `onCreate` of your main `application` by calling
+
+```kotlin
+val sdkHandle = startSDK(analytics = AnalyticsImpl, context = this)
+```
+
+with your implementation of the `Analytics` interface and application context, keep returned `SDKHandle` to have access
+to the `CallbackBreedRepository` and analytics.
+
+(Optional) log the app start
+
+```kotlin
+sdkHandle.appAnalytics.appStarted()
+```
+
+Now you can inject the BreedRepository and Analytics classes into your ViewModel and use all its methods by using
+
+```kotlin
+sdkHandle.breedRepository
+sdkHandle.appAnalytics
+sdkHandle.breedAnalytics
+```
+
+### iOS
+
+Import the `allshared` module
+
+```
+import allshared
+```
+
+Initialize the SDK in `init` function in the `App` class
+
+```
+init() {
+    self.handle = StartSDKKt.startSDK(analytics: AnalyticsImpl))
+}
+```
+
+with your implementation of the `Analytics` interface.
+
+The `startSDK` function returns `SDKHandle` data class that holds the `CallbackBreedRepository` and analytics classes,
+which your View Model can use to access the data and functions.
+
+(Optional) log the app start
+
+```
+handle.appAnalytics().appStarted()
+```
