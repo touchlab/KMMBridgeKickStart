@@ -10,14 +10,15 @@ import com.squareup.sqldelight.db.SqlDriver
 import io.ktor.client.engine.*
 import io.ktor.client.engine.okhttp.*
 
-fun breedStartup(context: Context): BreedRepository {
-    val locator = AndroidServiceLocator(context)
+fun breedStartup(context: Context, analyticsHandle: AnalyticsHandle): BreedRepository {
+    val locator = AndroidServiceLocator(context, analyticsHandle)
     return locator.breedRepository
 }
 
 internal class AndroidServiceLocator(
-    context: Context
-) : BaseServiceLocator() {
+    context: Context,
+    analyticsHandle: AnalyticsHandle
+) : BaseServiceLocator(analyticsHandle) {
 
     override val sqlDriver: SqlDriver by lazy {
         AndroidSqliteDriver(
