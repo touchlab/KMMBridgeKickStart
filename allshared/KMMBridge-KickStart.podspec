@@ -1,24 +1,24 @@
 Pod::Spec.new do |spec|
-    spec.name                     = 'allshared'
+    spec.name                     = 'KMMBridge-KickStart'
     spec.version                  = '0.1'
     spec.homepage                 = 'https://www.touchlab.co'
     spec.source                   = { :http=> ''}
     spec.authors                  = ''
     spec.license                  = ''
     spec.summary                  = 'KMMBridgeKickStart sample'
-    spec.vendored_frameworks      = 'build/cocoapods/framework/allshared.framework'
+    spec.vendored_frameworks      = 'build/cocoapods/framework/KMMBridgeKickStart.framework'
                 
     spec.ios.deployment_target = '13.5'
                 
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':allshared',
-        'PRODUCT_MODULE_NAME' => 'allshared',
+        'PRODUCT_MODULE_NAME' => 'KMMBridgeKickStart',
     }
                 
     spec.script_phases = [
         {
-            :name => 'Build allshared',
+            :name => 'Build KMMBridge-KickStart',
             :execution_position => :before_compile,
             :shell_path => '/bin/sh',
             :script => <<-SCRIPT
@@ -28,7 +28,7 @@ Pod::Spec.new do |spec|
                 fi
                 set -ev
                 REPO_ROOT="$PODS_TARGET_SRCROOT"
-                "$REPO_ROOT/../gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
+                "$REPO_ROOT/../../../../../private/var/folders/4r/4p1sjpm51yv_hd0pwtlm4xsc0000gn/T/wrap8loc/gradlew" -p "$REPO_ROOT" $KOTLIN_PROJECT_PATH:syncFramework \
                     -Pkotlin.native.cocoapods.platform=$PLATFORM_NAME \
                     -Pkotlin.native.cocoapods.archs="$ARCHS" \
                     -Pkotlin.native.cocoapods.configuration="$CONFIGURATION"
