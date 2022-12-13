@@ -1,7 +1,7 @@
 [versions]
 # Dependencies
 kotlin = "1.7.20"
-kmmBridge = "0.3.1"
+kmmBridge = "0.3.3"
 android-gradle-plugin = "7.2.2" # Don't bump to 7.3.x until Intellij supports it (unless you're ok with only Android Studio)
 gradle-versions = "0.42.0"
 androidx-test-junit = "1.1.3"
