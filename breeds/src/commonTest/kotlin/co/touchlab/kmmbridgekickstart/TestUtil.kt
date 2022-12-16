@@ -1,5 +1,5 @@
 package co.touchlab.kmmbridgekickstart
 
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
 
 internal expect fun testDbConnection(): SqlDriver

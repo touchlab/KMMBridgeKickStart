@@ -4,7 +4,7 @@ import co.touchlab.kmmbridgekickstart.ktor.DogApi
 import co.touchlab.kmmbridgekickstart.ktor.DogApiImpl
 import co.touchlab.kmmbridgekickstart.repository.BreedRepository
 import com.russhwolf.settings.Settings
-import com.squareup.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.SqlDriver
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
