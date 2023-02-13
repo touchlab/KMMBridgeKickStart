@@ -1,13 +1,12 @@
 package co.touchlab.kmmbridgekickstart
 
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
 import co.touchlab.kmmbridgekickstart.db.Breed
 import co.touchlab.kmmbridgekickstart.db.KMMBridgeKickStartDb
 import co.touchlab.kmmbridgekickstart.sqldelight.transactionWithContext
-import app.cash.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -22,7 +21,7 @@ internal class DatabaseHelper(
         dbRef.tableQueries
             .selectAll()
             .asFlow()
-            .mapToList(Dispatchers.Main)
+            .mapToList()
             .flowOn(backgroundDispatcher)
 
     suspend fun insertBreeds(breeds: List<String>) {
@@ -38,7 +37,7 @@ internal class DatabaseHelper(
         dbRef.tableQueries
             .selectById(id)
             .asFlow()
-            .mapToList(Dispatchers.Main)
+            .mapToList()
             .flowOn(backgroundDispatcher)
 
     suspend fun deleteAll() {

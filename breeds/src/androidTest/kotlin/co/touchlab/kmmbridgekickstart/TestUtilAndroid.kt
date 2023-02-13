@@ -3,9 +3,9 @@ package co.touchlab.kmmbridgekickstart
 import android.app.Application
 import androidx.test.core.app.ApplicationProvider
 import co.touchlab.kmmbridgekickstart.db.KMMBridgeKickStartDb
-import app.cash.sqldelight.android.AndroidSqliteDriver
-import app.cash.sqldelight.db.SqlDriver
-import app.cash.sqldelight.sqlite.driver.JdbcSqliteDriver
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.squareup.sqldelight.db.SqlDriver
+import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
 
 internal actual fun testDbConnection(): SqlDriver {
     // Try to use the android driver (which only works if we're on robolectric).
