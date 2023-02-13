@@ -69,7 +69,9 @@ android {
 addGithubPackagesRepository()
 
 sqldelight {
-    database("KMMBridgeKickStartDb") {
-        packageName = "co.touchlab.kmmbridgekickstart.db"
+    databases {
+        create("KMMBridgeKickStartDb") {
+            packageName.set("co.touchlab.kmmbridgekickstart.db")
+        }
     }
 }
