@@ -13,6 +13,7 @@ kermit = "1.1.3"
 multiplatformSettings = "1.0.0-alpha01"
 turbine = "0.8.0"
 sqlDelight = "1.5.5"
+kickstart = "0.3.7"
 
 ## SDK Versions
 minSdk = "21"
@@ -49,6 +50,7 @@ sqlDelight-runtime = { module = "com.squareup.sqldelight:runtime", version.ref =
 touchlab-kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
 [plugins]
@@ -56,6 +58,7 @@ gradleVersions = { id = "com.github.ben-manes.versions", version.ref = "gradle-v
 
 [bundles]
 ktor-common = ["ktor-client-core", "ktor-client-logging", "ktor-client-serialization", "ktor-client-contentNegotiation"]
+
 shared-commonTest = [
     "kotlin-test",
     "multiplatformSettings-test",
@@ -63,6 +66,7 @@ shared-commonTest = [
     "coroutines-test",
     "ktor-client-mock"
 ]
+
 shared-androidTest = [
     "androidx-test-junit",
     "coroutines-test",
