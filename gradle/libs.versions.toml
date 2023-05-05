@@ -68,4 +68,3 @@ shared-androidTest = [
     "coroutines-test",
     "sqlDelight-jvm"
 ]
-
