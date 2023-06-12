@@ -6,6 +6,9 @@ on:
 #      - "main"
 jobs:
   call-kmmbridge-publish:
-    uses: touchlab/KMMBridgeGithubWorkflow/.github/workflows/faktorybuildbranches.yml@v0.8
+    permissions:
+      contents: write
+      packages: write
+    uses: touchlab/KMMBridgeGithubWorkflow/.github/workflows/faktorybuildbranches.yml@v0.9
 #    secrets:
 #      PODSPEC_SSH_KEY: ${{ secrets.PODSPEC_SSH_KEY }}
