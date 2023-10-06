@@ -1,3 +1,7 @@
+# This repo is archived
+
+KMMBridge has had a major update and has a new template! See [KMP Team Workflows with KMMBridge](https://touchlab.co/kmmbridge-team-workflows) for details.
+
 # KMMBridgeKickStart
 
 This is a sample of what a production app might look like when using
